@@ -19,38 +19,51 @@
 - Redis
 - 虚拟环境（推荐）
 
-## 安装
+## 部署
 
 1. 克隆存储库
 2. 创建并激活虚拟环境：
+
 ```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. 安装依赖项：
+
 ```bash
 pip install -r requirements.txt
 ```
 
 4. 配置环境变量：
+
 - 复制 .env.example 文件并重命名为 .env
 - 在 .env 文件中更新配置值
 
 5. 初始化数据库：
+
 ```bash
 aerich init -t app.main.TORTOISE_ORM
 aerich init-db
 ```
 
+6. 迁移数据库:
+
+```bash
+aerich migrate
+aerich upgrade
+```
+
 ## 运行应用程序
 
 开发：
+
 ```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 生产：
+
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
@@ -58,12 +71,13 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ## API文档
 
 应用程序运行后，您可以访问：
+
 - Swagger UI: `http://localhost:8000/docs`
 - ReDoc: `http://localhost:8000/redoc`
 
 ## 项目结构
 
-```
+```text
 .
 ├── app/
 │   ├── api/
