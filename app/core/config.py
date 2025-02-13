@@ -7,6 +7,9 @@ load_dotenv()
 class Settings(BaseSettings):
     # Project
     PROJECT_NAME: str = "Vjudge Backend"
+
+    # Baseprefix
+    BASE_PREFIX: str = os.getenv("BASE_PREFIX","/api/v1")
     
     # Database
     DB_USERNAME: str = os.getenv("DB_USERNAME", "root")
