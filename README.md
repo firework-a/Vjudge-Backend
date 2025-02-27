@@ -68,6 +68,12 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
 ```
 
+或
+
+```bash
+gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app -b 0.0.0.0:8000
+```
+
 ## API文档
 
 应用程序运行后，您可以访问：
