@@ -1,9 +1,11 @@
-from fastapi import APIRouter, Depends, HTTPException, status
 from typing import Annotated
+
+from fastapi import APIRouter, Depends, HTTPException, status
+
+from app.api.deps import get_current_user
+from app.core.security import get_password_hash
 from app.models import User
 from app.schemas import UserUpdate, UserPasswordUpdate
-from app.core.security import get_password_hash
-from app.api.deps import get_current_user, get_current_admin
 
 router = APIRouter()
 
@@ -55,14 +57,14 @@ async def reset_password(
     if current_user.id != id and not current_user.is_admin:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
-            detail="Not enough permissions"
+            detail="权限不足"
         )
     
     user = await User.get_or_none(id=id)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
-            detail="User not found"
+            detail="未找到用户"
         )
     
     user.password_hash = get_password_hash(password_update.password)

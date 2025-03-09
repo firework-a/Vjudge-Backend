@@ -1,6 +1,8 @@
-from pydantic_settings import BaseSettings
+# app/core/config
 import os
+
 from dotenv import load_dotenv
+from pydantic_settings import BaseSettings
 
 load_dotenv()
 
@@ -36,6 +38,11 @@ class Settings(BaseSettings):
     DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
     HOST: str = os.getenv("HOST", "0.0.0.0")
     PORT: int = int(os.getenv("PORT", "8000"))
+
+    # Rate Limiting
+    RATE_LIMIT_GENERAL: str = os.getenv("RATE_LIMIT_GENERAL", "100/minute")  # 普通接口限制
+    RATE_LIMIT_AUTH: str = os.getenv("RATE_LIMIT_AUTH", "20/minute")  # 认证接口限制
+    RATE_LIMIT_STRICT: str = os.getenv("RATE_LIMIT_STRICT", "3/minute")  # 严格限制的接口
 
     class Config:
         env_file = ".env"

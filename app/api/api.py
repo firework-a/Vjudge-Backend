@@ -4,7 +4,7 @@ from app.api.endpoints import auth, users, notices, sources, tags, questions
 api_router = APIRouter()
 
 # Auth routes
-api_router.include_router(auth.router, tags=["auth"])
+api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
 
 # User routes
 api_router.include_router(users.router, prefix="/user", tags=["users"])

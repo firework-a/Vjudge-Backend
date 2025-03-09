@@ -1,20 +1,24 @@
 from tortoise import fields, models
-from datetime import datetime
+
 
 class User(models.Model):
     id = fields.IntField(pk=True)
+    uid = fields.CharField(max_length=16, unique=True)
     email = fields.CharField(max_length=128, unique=True)
     password_hash = fields.CharField(max_length=128)
     nick_name = fields.CharField(max_length=50, null=True)
     phone = fields.CharField(max_length=20, null=True)
-    solved = fields.IntField(default=0)
-    is_admin = fields.BooleanField(default=False)
+    gender = fields.IntField(null=True, default=2, description="0:男 1:女 2:未知")
     avatar = fields.CharField(max_length=128, default="default.png")
     created_at = fields.DatetimeField(auto_now_add=True)
     modified_at = fields.DatetimeField(auto_now=True)
+    is_admin = fields.BooleanField(default=False)
+    is_active = fields.BooleanField(default=True)
+    is_deleted = fields.BooleanField(default=False)
 
     class Meta:
         table = "users"
+
 
 class Notice(models.Model):
     id = fields.IntField(pk=True)
@@ -25,6 +29,7 @@ class Notice(models.Model):
     class Meta:
         table = "notices"
 
+
 class Source(models.Model):
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=50, unique=True)
@@ -32,12 +37,14 @@ class Source(models.Model):
     class Meta:
         table = "sources"
 
+
 class Tag(models.Model):
     id = fields.IntField(pk=True)
     name = fields.CharField(max_length=50, unique=True)
 
     class Meta:
         table = "tags"
+
 
 class Question(models.Model):
     id = fields.IntField(pk=True)

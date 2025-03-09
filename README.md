@@ -5,6 +5,7 @@
 ## 特点
 
 - 使用JWT进行用户身份验证
+- 请求速率限制
 - 用户配置文件管理
 - 筛选和分页
 - 通知系统
@@ -98,6 +99,7 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app -b 0.0.0.0:8000
 │   │   └── deps.py
 │   ├── core/
 │   │   ├── config.py
+│   │   ├── log_config.py
 │   │   └── security.py
 │   ├── models.py
 │   ├── schemas.py
