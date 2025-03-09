@@ -98,6 +98,7 @@ gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app -b 0.0.0.0:8000
 │   │   └── deps.py
 │   ├── core/
 │   │   ├── config.py
+│   │   ├── log_config.py
 │   │   └── security.py
 │   ├── models.py
 │   ├── schemas.py
